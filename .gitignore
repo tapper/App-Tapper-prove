@@ -1,0 +1,4 @@
+.*
+!.gitignore
+App-Tapper-prove-*
+Debian_CPANTS.txt
