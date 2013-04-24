@@ -1,4 +1,6 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.001     2013-04-24
         - a drop-in replacement for 'prove' with Tapper support
