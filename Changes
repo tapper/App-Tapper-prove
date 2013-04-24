@@ -1,3 +1,4 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+        - a drop-in replacement for 'prove' with Tapper support
