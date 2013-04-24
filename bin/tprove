@@ -1,6 +1,6 @@
 #! /usr/bin/perl
 # PODNAME: tprove
-# ABSTRACT: Tapper - alternative 'prove' which reports results to Tapper
+# ABSTRACT: Tapper - alternative 'prove' which uploads results to a Tapper server
 
 # -----------------------------------------------------------
 # Keep this a single file with no external libs and only core
@@ -69,17 +69,6 @@ sub pack_tapper_archive {
     return $full_name;
 }
 
-=head2 report_tapper_archive
-
-Send the actual report to reports receiver framework.
-
-@param hash ref - args
-
-@return success - int - report id
-@return error   - die()
-
-=cut
-
 sub report_tapper_archive {
     my ($archive) = @_;
 
@@ -111,14 +100,9 @@ sub report_tapper_archive {
     return $report_id;
 }
 
-=head2 get_machine_name
-
-Return hostname for metainfo in typical Tapper notation, i.e., just
-the hostname (without FQDN) in host context or C<host:guest> (colon
-separated) in guest context.
-
-=cut
-
+# Return hostname for metainfo in typical Tapper notation, i.e., just
+# the hostname (without FQDN) in host context or C<host:guest> (colon
+# separated) in guest context.
 sub get_machine_name
 {
         my $etc_tapper = "/etc/tapper";
@@ -247,3 +231,26 @@ sub main {
     no warnings 'uninitialized';
     ((caller 0)[3] eq "(eval)") ? 1 : main;
 }
+
+=pod
+
+=head1 ABOUT
+
+This is a drop-in replacement for C<prove> to run TAP-based test suites.
+
+It executes the normal C<prove> but injects additional parameters to
+generate C<prove>'s results into a so called I<TAP-Archive>, then
+injects some meta information into this archive, and finally uploads
+the generated archive to your personal B<Tapper> instance, based on
+the environment variable C<TAPPER_REPORT_SERVER> (and optionally
+C<TAPPER_REPORT_PORT>).
+
+Learn more about Tapper on L<tapper-testing.org|http://tapper-testing.org>.
+
+=head1 SYNOPSIS
+
+ $ prove  -vl t/        # normal prove until satisfied
+ $ tprove -vl t/        # nearly the same, just a little "t" in front
+
+
+=cut
