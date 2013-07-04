@@ -86,9 +86,9 @@ sub report_tapper_archive {
     my $sock = IO::Socket::INET->new(PeerAddr => $report_server,
                                      PeerPort => $report_port,
                                      Proto    => 'tcp');
-    print STDERR ("Report to Tapper at ".($report_server || "report_server=UNDEF").":".($report_port || "report_port=UNDEF"));
+    print STDERR "Report to Tapper at ".($report_server || "report_server=UNDEF").":".($report_port || "report_port=UNDEF");
     unless ($sock) {
-        print STDERR( "\nResult TAP in $archive can not be sent to Tapper server.\n");
+        print STDERR "\nResult TAP in $archive can not be sent to Tapper server.\n";
         die "\nCan't open connection to ", ($report_server || "report_server=UNDEF"), ":", ($report_port || "report_port=UNDEF"), ":$!"
     }
 
@@ -96,7 +96,7 @@ sub report_tapper_archive {
     ($report_id) = $report_id =~ /(\d+)$/;
     $sock->print($gzipped_content);
     $sock->close();
-    print STDERR ( ", id=$report_id, url=http://$report_server".($report_server =~ /^(localhost|0)$/ ? ":3000" : "")."/tapper/reports/id/$report_id\n");
+    print STDERR ", id=$report_id, url=http://$report_server".($report_server =~ /^(localhost|0)$/ ? ":3000" : "")."/tapper/reports/id/$report_id\n";
     return $report_id;
 }
 
