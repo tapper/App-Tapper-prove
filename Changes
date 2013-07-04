@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+        - [FIX] print STDERR syntax
 
 0.001     2013-04-24
         - a drop-in replacement for 'prove' with Tapper support
